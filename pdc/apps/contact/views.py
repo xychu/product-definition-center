@@ -46,7 +46,7 @@ class PersonViewSet(viewsets.PDCModelViewSet):
         __Response__:
 
             {
-                "url": url,
+                "id": int,
                 "username": string,
                 "email": email_address
             }
@@ -55,7 +55,7 @@ class PersonViewSet(viewsets.PDCModelViewSet):
 
             curl -H "Content-Type: application/json"  -X POST -d '{"username": "test", "email": "test@example.com"}' %(HOST_NAME)s/%(API_PATH)s/persons/
             # output
-            {"url": "%(HOST_NAME)s/%(API_PATH)s/persons/1/", "username": "test", "email": "test@example.com"}
+            {"id": 1, "username": "test", "email": "test@example.com"}
         """
         return super(PersonViewSet, self).create(request, *args, **kwargs)
 
@@ -83,7 +83,7 @@ class PersonViewSet(viewsets.PDCModelViewSet):
                 "previous": null,
                 "results": [
                     {
-                        "url": url,
+                        "id": int,
                         "username": string,
                         "email": email_address
                     },
@@ -105,7 +105,7 @@ class PersonViewSet(viewsets.PDCModelViewSet):
         __Response__:
 
             {
-                "url": url,
+                "id": int,
                 "username": string,
                 "email": email_address
             }
@@ -114,7 +114,7 @@ class PersonViewSet(viewsets.PDCModelViewSet):
 
             curl -H "Content-Type: application/json" %(HOST_NAME)s/%(API_PATH)s/persons/1/
             # output
-            {"url": "%(HOST_NAME)s/%(API_PATH)s/persons/1/", "username": "test", "email": "test@example.com"}
+            {"id": 1, "username": "test", "email": "test@example.com"}
         """
         return super(PersonViewSet, self).retrieve(request, *args, **kwargs)
 
@@ -140,7 +140,7 @@ class PersonViewSet(viewsets.PDCModelViewSet):
         __Response__:
 
             {
-                "url": url,
+                "id": int,
                 "username": string,
                 "email": email_address
             }
@@ -151,13 +151,13 @@ class PersonViewSet(viewsets.PDCModelViewSet):
 
             curl -X PUT -d '{"username": "new_name", "email": "new_email"}' -H "Content-Type: application/json" %(HOST_NAME)s/%(API_PATH)s/persons/1/
             # output
-            {"url": "%(HOST_NAME)s/%(API_PATH)s/persons/1/", "username": "new_name", "email": "new_email"}
+            {"id": 1, "username": "new_name", "email": "new_email"}
 
         PATCH:
 
             curl -X PATCH -d '{"email": "new_email"}' -H "Content-Type: application/json" %(HOST_NAME)s/%(API_PATH)s/persons/1/
             # output
-            {"url": "%(HOST_NAME)s/%(API_PATH)s/persons/1/", "username": "name", "email": "new_email"}
+            {"id": 1, "username": "name", "email": "new_email"}
         """
         return super(PersonViewSet, self).update(request, *args, **kwargs)
 
@@ -219,7 +219,7 @@ class MaillistViewSet(viewsets.PDCModelViewSet):
         __Response__:
 
             {
-                "url": url,
+                "id": int,
                 "mail_name": string,
                 "email": email_address
             }
@@ -228,7 +228,7 @@ class MaillistViewSet(viewsets.PDCModelViewSet):
 
             curl -H "Content-Type: application/json"  -X POST -d '{"mail_name": "test", "email": "test@example.com"}' %(HOST_NAME)s/%(API_PATH)s/maillists/
             # output
-            {"url": "%(HOST_NAME)s/%(API_PATH)s/maillists/1/", "mail_name": "test", "email": "test@example.com"}
+            {"id": 1, "mail_name": "test", "email": "test@example.com"}
         """
         return super(MaillistViewSet, self).create(request, *args, **kwargs)
 
@@ -256,7 +256,7 @@ class MaillistViewSet(viewsets.PDCModelViewSet):
                 "previous": null,
                 "results": [
                     {
-                        "url": "%(HOST_NAME)s/%(API_PATH)s/maillists/1/",
+                        "id": int,
                         "mail_name": string,
                         "email": string
                     },
@@ -275,7 +275,7 @@ class MaillistViewSet(viewsets.PDCModelViewSet):
                 "previous": null,
                 "results": [
                     {
-                        "url": "%(HOST_NAME)s/%(API_PATH)s/maillists/1/",
+                        "id": int,
                         "mail_name": "test",
                         "email": "test@example.com"
                     }
@@ -297,7 +297,7 @@ class MaillistViewSet(viewsets.PDCModelViewSet):
         __Response__:
 
             {
-                "url": url,
+                "id": int,
                 "mail_name": string,
                 "email": email_address
             }
@@ -306,7 +306,7 @@ class MaillistViewSet(viewsets.PDCModelViewSet):
 
             curl -H "Content-Type: application/json" %(HOST_NAME)s/%(API_PATH)s/maillists/1/
             # output
-            {"url": "%(HOST_NAME)s/%(API_PATH)s/maillists/1/", "mail_name": "test", "email": "test@example.com"}
+            {"id": 1, "mail_name": "test", "email": "test@example.com"}
         """
         return super(MaillistViewSet, self).retrieve(request, *args, **kwargs)
 
@@ -331,7 +331,7 @@ class MaillistViewSet(viewsets.PDCModelViewSet):
         __Response__:
 
             {
-                "url": url,
+                "id": int,
                 "mail_name": string,
                 "email": email_address
             }
@@ -342,13 +342,13 @@ class MaillistViewSet(viewsets.PDCModelViewSet):
 
             curl -X PUT -d '{"mail_name": "new_name", "email": "new_email"}' -H "Content-Type: application/json" %(HOST_NAME)s/%(API_PATH)s/maillists/1/
             # output
-            {"url": "%(HOST_NAME)s/%(API_PATH)s/maillists/1/", "mail_name": "new_name", "email": "new_email"}
+            {"id": 1, "mail_name": "new_name", "email": "new_email"}
 
         PATCH:
 
             curl -X PATCH -d '{"email": "new_email"}' -H "Content-Type: application/json" %(HOST_NAME)s/%(API_PATH)s/maillists/1/
             # output
-            {"url": "%(HOST_NAME)s/%(API_PATH)s/maillists/1/", "mail_name": "name", "email": "new_email"}
+            {"id": 1, "mail_name": "name", "email": "new_email"}
         """
         return super(MaillistViewSet, self).update(request, *args, **kwargs)
 
@@ -409,7 +409,7 @@ class ContactRoleViewSet(viewsets.PDCModelViewSet):
         __Response__:
 
             {
-                "url": url,
+                "id": int,
                 "name": string,
             }
 
@@ -417,7 +417,7 @@ class ContactRoleViewSet(viewsets.PDCModelViewSet):
 
             curl -H "Content-Type: application/json"  -X POST -d '{"name": "test"}' %(HOST_NAME)s/%(API_PATH)s/contact-roles/
             # output
-            {"url": "%(HOST_NAME)s/%(API_PATH)s/contact-roles/1/", "name": "test"}
+            {"id": 1, "name": "test"}
         """
         return super(ContactRoleViewSet, self).create(request, *args, **kwargs)
 
@@ -444,11 +444,11 @@ class ContactRoleViewSet(viewsets.PDCModelViewSet):
                 "previous": null,
                 "results": [
                     {
-                        "url": "%(HOST_NAME)s/%(API_PATH)s/contact-roles/test_role/",
+                        "id": int,
                         "name": "test_role",
                     },
                     {
-                        "url": url,
+                        "id": int,
                         "name": string,
                     },
                     ...
@@ -464,11 +464,11 @@ class ContactRoleViewSet(viewsets.PDCModelViewSet):
                 "previous": null,
                 "results": [
                     {
-                        "url": "%(HOST_NAME)s/%(API_PATH)s/contact-roles/qe_leader/",
+                        "id": 1,
                         "name": "qe_leader",
                     },
                     {
-                        "url": "%(HOST_NAME)s/%(API_PATH)s/contact-roles/qe_group/",
+                        "id": 2,
                         "name": "qe_group",
                     },
                     ...
@@ -485,7 +485,7 @@ class ContactRoleViewSet(viewsets.PDCModelViewSet):
                 "previous": null,
                 "results": [
                     {
-                        "url": "%(HOST_NAME)s/%(API_PATH)s/contact-roles/test/",
+                        "id": 1,
                         "name": "test",
                     }
                 ]
@@ -506,7 +506,7 @@ class ContactRoleViewSet(viewsets.PDCModelViewSet):
         __Response__:
 
             {
-                "url": url,
+                "id": int,
                 "name": string,
             }
 
@@ -514,7 +514,7 @@ class ContactRoleViewSet(viewsets.PDCModelViewSet):
 
             curl -H "Content-Type: application/json" %(HOST_NAME)s/%(API_PATH)s/contact-roles/QE_Leader/
             # output
-            {"url": "%(HOST_NAME)s/%(API_PATH)s/contact-roles/QE_Leader/", "name": "QE_Leader"}
+            {"id": 1, "name": "QE_Leader"}
         """
         return super(ContactRoleViewSet, self).retrieve(request, *args, **kwargs)
 
@@ -533,7 +533,7 @@ class ContactRoleViewSet(viewsets.PDCModelViewSet):
         __Response__:
 
             {
-                "url": url,
+                "id": int,
                 "name": string,
             }
 
@@ -543,13 +543,13 @@ class ContactRoleViewSet(viewsets.PDCModelViewSet):
 
             curl -X PUT -d '{"name": "new_name"}' -H "Content-Type: application/json" %(HOST_NAME)s/%(API_PATH)s/contact-roles/QE_ACK/
             # output
-            {"url": "%(HOST_NAME)s/%(API_PATH)s/contact-roles/new_name/", "name": "new_name"}
+            {"id": 1, "name": "new_name"}
 
         PATCH:
 
             curl -X PATCH -d '{"name": "new_name"}' -H "Content-Type: application/json" %(HOST_NAME)s/%(API_PATH)s/contact-roles/QE_ACK/
             # output
-            {"url": "%(HOST_NAME)s/%(API_PATH)s/contact-roles/new_name/", "name": "new_name"}
+            {"id": 1, "name": "new_name"}
         """
         return super(ContactRoleViewSet, self).update(request, *args, **kwargs)
 
@@ -623,7 +623,7 @@ class RoleContactViewSet(viewsets.PDCModelViewSet):
         __Response__:
 
             {
-                "url": "%(HOST_NAME)s/%(API_PATH)s/role-contacts/1/",
+                "id": int,
                 "contact_role": "qe_group",
                 "contact": {
                     "mail_name": string,
@@ -635,7 +635,7 @@ class RoleContactViewSet(viewsets.PDCModelViewSet):
 
             curl -H "Content-Type: application/json"  -X POST -d '{"contact_role": "qe_group", "contact": {"username": "test", "email": "test@example.com"}}' %(HOST_NAME)s/%(API_PATH)s/role-contacts/
             # output
-            {"url": "%(HOST_NAME)s/%(API_PATH)s/role-contacts/1/", "contact_role": "qe_group", "contact": {"username": "test", "email": "test@example.com"}}
+            {"id": 1, "contact_role": "qe_group", "contact": {"username": "test", "email": "test@example.com"}}
         """
         return super(RoleContactViewSet, self).create(request, *args, **kwargs)
 
@@ -671,7 +671,7 @@ class RoleContactViewSet(viewsets.PDCModelViewSet):
                 "previous": null,
                 "results": [
                     {
-                        "url": "%(HOST_NAME)s/%(API_PATH)s/role-contacts/1/",
+                        "id": int,
                         "contact_role": "qe_group",
                         "contact": {
                             "mail_name": string,
@@ -691,7 +691,7 @@ class RoleContactViewSet(viewsets.PDCModelViewSet):
                 "previous": null,
                 "results": [
                     {
-                        "url": "%(HOST_NAME)s/%(API_PATH)s/role-contacts/1/",
+                        "id": int,
                         "contact_role": "qe_group",
                         "contact": {
                             "mail_name": string,
@@ -712,7 +712,7 @@ class RoleContactViewSet(viewsets.PDCModelViewSet):
                 "previous": null,
                 "results": [
                     {
-                        "url": "%(HOST_NAME)s/%(API_PATH)s/role-contacts/1/",
+                        "id": int,
                         "contact_role": "qe_group",
                         "contact": {
                             "username": "test",
@@ -737,7 +737,7 @@ class RoleContactViewSet(viewsets.PDCModelViewSet):
         __Response__:
 
             {
-                "url": "%(HOST_NAME)s/%(API_PATH)s/role-contacts/1/",
+                "id": int,
                 "contact_role": "qe_group",
                 "contact": {
                     "mail_name": string,
@@ -749,7 +749,7 @@ class RoleContactViewSet(viewsets.PDCModelViewSet):
 
             curl -H "Content-Type: application/json" %(HOST_NAME)s/%(API_PATH)s/role-contacts/1/
             # output
-            {"url": "%(HOST_NAME)s/%(API_PATH)s/role-contacts/1/", "contact_role": "qe_group", "contact": {"username": "test", "email": "test@example.com"}}
+            {"id": 1, "contact_role": "qe_group", "contact": {"username": "test", "email": "test@example.com"}}
         """
         return super(RoleContactViewSet, self).retrieve(request, *args, **kwargs)
 
@@ -786,7 +786,7 @@ class RoleContactViewSet(viewsets.PDCModelViewSet):
         __Response__:
 
             {
-                "url": "%(HOST_NAME)s/%(API_PATH)s/role-contacts/1/",
+                "id": 1,
                 "contact_role": "new_role",
                 "contact": {
                     "username": "new_name",
@@ -800,13 +800,13 @@ class RoleContactViewSet(viewsets.PDCModelViewSet):
 
             curl -X PUT -d '{"contact_role": "new_role", "contact": {"username": "new_name", "email": "new_email"}}' -H "Content-Type: application/json" %(HOST_NAME)s/%(API_PATH)s/role-contacts/1/
             # output
-            {"url": "%(HOST_NAME)s/%(API_PATH)s/role-contacts/1/", "contact_role": "new_role", "contact": {"username": "new_name", "email": "new_email"}}
+            {"id": 1, "contact_role": "new_role", "contact": {"username": "new_name", "email": "new_email"}}
 
         PATCH:
 
             curl -X PATCH -d '{"contact_role": "new_role"}' -H "Content-Type: application/json" %(HOST_NAME)s/%(API_PATH)s/role-contacts/1/
             # output
-            {"url": "%(HOST_NAME)s/%(API_PATH)s/role-contacts/1/", "contact_role": "new_role", "contact": {"username": "new_name", "email": "new_email"}}
+            {"id": 1, "contact_role": "new_role", "contact": {"username": "new_name", "email": "new_email"}}
         """
         return super(RoleContactViewSet, self).update(request, *args, **kwargs)
 
