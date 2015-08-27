@@ -4,7 +4,7 @@
 
 Name:           python-%{srcname}
 Version:        0.1.0
-Release:        alpha.2%{?dist}
+Release:        alpha.3%{?dist}
 Summary:        Red Hat Product Definition Center
 Group:          Development/Libraries
 License:        MIT
@@ -91,6 +91,9 @@ fi
 
 
 %changelog
+* Thu Aug 27 2015 Xiangyang Chu <xchu@redhat.com> 0.1.0-alpha.3
+- new package built with tito
+
 * Thu Aug 27 2015 Xiangyang Chu <xchu@redhat.com> 0.1.0-alpha.2
 - Use release tagger. (xchu@redhat.com)
 - init spec for copr build
