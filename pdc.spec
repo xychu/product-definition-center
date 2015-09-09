@@ -90,6 +90,12 @@ fi
 
 
 %changelog
+* Wed Sep 09 2015 Xiangyang Chu <xchu@redhat.com> 0.1.0-1
+- new package built with tito
+
+* Wed Sep 09 2015 Xiangyang Chu <xchu@redhat.com>
+- new package built with tito
+
 * Thu Aug 27 2015 Xiangyang Chu <xchu@redhat.com> 0.1.0-1
 - Use release tagger. (xchu@redhat.com)
 - init spec for copr build
