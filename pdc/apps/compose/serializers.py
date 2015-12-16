@@ -10,7 +10,9 @@ from pdc.apps.common.models import Arch
 from pdc.apps.common.serializers import StrictSerializerMixin, DynamicFieldsSerializerMixin
 from pdc.apps.common.fields import ChoiceSlugField
 from .models import (Compose, OverrideRPM, ComposeAcceptanceTestingState,
-                     ComposeTree, Variant, Location, Scheme)
+                     ComposeTree, Variant, Location, Scheme, ComposeImage,
+                     VariantArch, Path)
+from pdc.apps.package.models import Image
 from pdc.apps.release.models import Release
 from pdc.apps.utils.utils import urldecode
 from pdc.apps.repository.models import ContentCategory
@@ -143,3 +145,56 @@ class ComposeTreeSerializer(StrictSerializerMixin,
         else:
             raise serializers.ValidationError('The combination with compose %s, variant %s, arch %s does not exist' %
                                               (compose, variant, arch))
+
+
+class ComposeImageRTTTestSerializer(StrictSerializerMixin,
+                                    DynamicFieldsSerializerMixin,
+                                    serializers.ModelSerializer):
+    compose                 = serializers.CharField(source='variant_arch.variant.compose')
+    variant                 = serializers.CharField(source='variant_arch.variant')
+    arch                    = serializers.CharField(source='variant_arch.arch')
+    file_name               = serializers.CharField(source='image.file_name')
+    sha256                  = serializers.CharField(source='image.sha256')
+    test_result             = ChoiceSlugField(source='rtt_test_result', slug_field='name',
+                                              queryset=ComposeAcceptanceTestingState.objects.all())
+
+    class Meta:
+        model = ComposeImage
+        fields = ('compose', 'variant', 'arch', 'file_name', 'sha256', 'test_result')
+
+    def to_internal_value(self, data):
+        ret = {}
+        try:
+            if 'variant' in data and 'compose' in data and 'arch' in data:
+                ret['variant_arch'] = VariantArch.objects.get(
+                    variant__variant_uid=data.get('variant'),
+                    variant__compose__compose_id=data.get('compose'),
+                    arch__name=data.get('arch'))
+            if 'file_name' in data and 'sha256' in data:
+                ret['image'] = Image.objects.get(file_name=data.get('file_name'),
+                                                 sha256=data.get('sha256'))
+            if 'test_result' in data:
+                ret['rtt_test_result'] = ComposeAcceptanceTestingState.objects.get(
+                    name=data.get('test_result'))
+        except Exception as e:
+            raise serializers.ValidationError(e)
+        if 'variant_arch' in ret and 'image' in ret:
+            try:
+                compose_image = ComposeImage.objects.get(variant_arch=ret['variant_arch'],
+                                                         image=ret['image'])
+            except Exception as e:
+                ret['path'] = Path.objects.get(path='')
+            else:
+                ret['path'] = compose_image.path
+        return ret
+
+    def create(self, validated_data):
+        try:
+            compose_image = ComposeImage.objects.create(**validated_data)
+        except TypeError as exc:
+            msg = (
+                'Got a `TypeError` when calling `%s.objects.create()`. '
+                '\nOriginal exception text was: %s.' % ('ComposeImage', exc)
+            )
+            raise TypeError(msg)
+        return compose_image

@@ -10,7 +10,7 @@ from django.db.models import Q
 from django.core.exceptions import ValidationError
 
 from pdc.apps.common.filters import value_is_not_empty
-from .models import Compose, OverrideRPM, ComposeTree
+from .models import Compose, OverrideRPM, ComposeTree, ComposeImage
 
 
 class ComposeFilter(django_filters.FilterSet):
@@ -89,3 +89,18 @@ class ComposeTreeFilter(django_filters.FilterSet):
     class Meta:
         model = ComposeTree
         fields = ('compose', 'variant', 'arch', 'location', 'scheme')
+
+
+class ComposeImageRTTTestFilter(django_filters.FilterSet):
+    compose         = django_filters.CharFilter(name='variant_arch__variant__compose__compose_id',
+                                                lookup_type='iexact')
+    variant         = django_filters.CharFilter(name='variant_arch__variant__variant_uid',
+                                                lookup_type='iexact')
+    arch            = django_filters.CharFilter(name='variant_arch__arch__name', lookup_type='iexact')
+    file_name       = django_filters.CharFilter(name='image__filename', lookup_type='iexact')
+    sha256          = django_filters.CharFilter(name='image__sha256', lookup_type='iexact')
+    test_result     = django_filters.CharFilter(name='acceptance_testing__name')
+
+    class Meta:
+        model = ComposeImage
+        fields = ('compose', 'variant', 'arch', 'file_name', 'sha256', 'test_result')

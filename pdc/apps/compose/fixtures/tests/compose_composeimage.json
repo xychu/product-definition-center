@@ -12,6 +12,7 @@
     "fields": {
         "variant_arch": 1,
         "image": 1,
+        "rtt_test_result": 1
         "path": 1
     }
   },
